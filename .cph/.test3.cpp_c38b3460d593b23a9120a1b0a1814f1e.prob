@@ -1,0 +1,1 @@
+{"name":"Local: test3","url":"/home/sukuna/Desktop/CPP-Code-master/test3.cpp","tests":[{"id":1693392432738,"input":"3\ncodecook\nodeckooc\nffffffff","output":"dccooeko\ndccooeko\n-1"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"/home/sukuna/Desktop/CPP-Code-master/test3.cpp","group":"local","local":true}

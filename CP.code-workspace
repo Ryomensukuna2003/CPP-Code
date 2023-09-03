@@ -1,0 +1,15 @@
+{
+  "folders": [
+	{
+		"name": "CP",
+		"path": "."
+	}
+],
+  "settings": {
+    "files.associations": {
+      "iostream": "cpp",
+      "*.tcc": "cpp",
+      "random": "cpp"
+    }
+  }
+}
