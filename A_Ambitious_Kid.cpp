@@ -46,7 +46,7 @@ void solve()
         return;
     }
     else if(vec2.size()==0){
-        cout<<*min_element(all(kvec1));
+        cout<<*min_element(all(vec1));
         return;
     }
     int mini=*min_element(all(vec1));

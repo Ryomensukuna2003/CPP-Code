@@ -2,6 +2,7 @@
 #include <ext/pb_ds/assoc_container.hpp>
 #include <ext/pb_ds/tree_policy.hpp>
 using namespace  __gnu_pbds;
+using namespace  std;
  
 //                                「本 物 の 柔 術 を 見 せ て や る」
  
@@ -11,7 +12,8 @@ using namespace  __gnu_pbds;
 #define all(x)   (x).begin(), (x).end()
 #define mod      1000000007
 #define FAST     ios_base ::sync_with_stdio(false); cin.tie(NULL)
-using namespace  std;
+#define forin(x,y) for(int i=0;i<x;i++){int x;cin>>x;y.pb(x);}
+#define forout(x)  for(auto y:x){cout<<y<<' ';}
 typedef tree<ll, null_type, less<ll>, rb_tree_tag,tree_order_statistics_node_update> pbds;
 
 bool substringcheck(string s1,string s2){
@@ -20,18 +22,28 @@ bool substringcheck(string s1,string s2){
     else return false;
 }
 
+
 void solve()
 {
     int n;cin>>n;
-    cout<<n;
+    if (n < 0){
+        cout<< -1;
+        return;
+    } 
+    int count = 0;
+    for (int i = 5; n / i >= 1; i *= 5)
+        count += n / i;
+    cout<<count<<endl;
+
 }
 
 int main(){
     FAST;
     ll t=1;
-    // cin>>t;
+    //cin>>t;
     while(t--){
         solve();
 }
 return 0;
 }
+

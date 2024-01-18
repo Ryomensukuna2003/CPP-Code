@@ -2,39 +2,96 @@
 #include <ext/pb_ds/assoc_container.hpp>
 #include <ext/pb_ds/tree_policy.hpp>
 using namespace  __gnu_pbds;
+using namespace  std;
  
 //                                「本 物 の 柔 術 を 見 せ て や る」
  
 #define vll      vector<long long int>
 #define ll       long long
 #define pb       push_back
+const ll M = 1e9 + 7;
+const ll N = 1e5 + 5;
+const ll inf = 2e18;
 #define all(x)   (x).begin(), (x).end()
-#define mod      1000000007
 #define FAST     ios_base ::sync_with_stdio(false); cin.tie(NULL)
-using namespace  std;
+#define forin(x,y) for(auto i=0;i<x;i++){int x;cin>>x;y.pb(x);}
+#define forout(x)  for(auto y:x){cout<<y<<' ';}
 typedef tree<ll, null_type, less<ll>, rb_tree_tag,tree_order_statistics_node_update> pbds;
+
+bool substringcheck(string s1,string s2){
+    // String 1 in String 2
+    if (s2.find(s1) != std::string::npos) return true;
+    else return false;
+}
+
+void rem_dup_order(vector<ll> &vec1) {
+  auto it = unique(vec1.begin(), vec1.end());
+    vec1.resize(distance(vec1.begin(), it));
+}
+
+ll mod(ll x) { return (x % M); }
+ll mod_minus(ll a, ll b)
+{
+    ll ans = (mod(a) - mod(b));
+    if (ans < 0)
+        ans = mod(ans + M);
+    return ans;
+}
+ll mod_mul(ll a, ll b) { return mod(mod(a) * mod(b)); }
+ll mod_add(ll a, ll b) { return mod(mod(a) + mod(b)); }
+ll power(ll a, ll n)
+{
+    if (n == 0)
+        return 1;
+    else if (n == 1)
+        return a;
+    ll R = power(a, n / 2) % M;
+    if (n % 2 == 0)
+    {
+        return mod(mod_mul(R, R));
+    }
+    else
+    {
+        return mod(mod_mul(mod_mul(R, a), mod(R)));
+    }
+}
+ll mod_div(ll a, ll b)
+{
+    ll ans = mod(a);
+    ll b1 = power(b, M - 2);
+    ans = mod(mod_mul(ans, b1));
+    return ans;
+}
 
 void solve()
 {
+    deque<pair<int,int>>d1;
     int n,x;cin>>n>>x;
-    vll vec1;
-    for(int i=0;i<n;i++){
-        int x;cin>>x;
-        vec1.pb(x);
+    if(n==1){
+        cout<<1<<endl;
+        return;
     }
-    int count=0;
-    int max_count=0;
     for(int i=0;i<n;i++){
-        vec1[i]-=x;
-        vec1[i]=count;
-        
+        int val;cin>>val;
+        d1.push_back(pair<int,int>(val,i));
+    }
+    while(true){
+        if(x>=d1[0].first) d1.pop_front();
+        else{
+            d1.push_back(pair<int,int>((d1[0].first-x),d1[0].second));
+            d1.pop_front();
+        }
+        if(d1.size()==1){
+            cout<<d1[0].second+1<<endl;
+            break;
+        }
     }
 }
 
 int main(){
     FAST;
     ll t=1;
-    cin>>t;
+    //cin>>t;
     while(t--){
         solve();
 }

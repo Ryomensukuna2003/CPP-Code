@@ -16,18 +16,17 @@ typedef tree<ll, null_type, less<ll>, rb_tree_tag,tree_order_statistics_node_upd
 
 void solve()
 {
-    int a,b,n,s;cin>>a>>b>>n>>s;
-    int count=0;
-    int sum;
-    for(int i=1;i<=a;i++){
-        sum+=n*i;
-        count++;
-        if(sum>=s){
-            count-=1;
-            break;
-        }
+    long double a,b,n,s;cin>>a>>b>>n>>s;
+    long double val=floor(s/n);
+    if((val)>=a && (s-(a*n))<=b){
+        cout<<"YES"<<endl;
     }
-    cout<<count<<endl;
+    else if((val)<=a && (s-((val)*n)<=b)){
+        cout<<"YES"<<endl;
+    }
+    else{
+        cout<<"NO"<<endl;
+    }
 }
 
 int main(){

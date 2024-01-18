@@ -16,18 +16,16 @@ typedef tree<ll, null_type, less<ll>, rb_tree_tag,tree_order_statistics_node_upd
 
 void solve()
 {
-    int a,b;cin>>a>>b;
-    if(a==b){
+    ll a,b;cin>>a>>b;
+    if(b==1){
         cout<<"NO"<<endl;
+        return;
     }
-    else{
-        int val3=a*b*2;
-        int val1=a;
-        int val2=val3-a;
-
-        cout<<"YES"<<endl;
-        cout<<val1<<" "<<val2<<" "<<val3<<endl;
-    }
+    ll val3=a*b*4;
+    ll val1=a;
+    ll val2=a*((b*4)-1);
+    cout<<"YES"<<endl;
+    cout<<val1<<" "<<val2<<" "<<val3<<endl;
 
 }
 

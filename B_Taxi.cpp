@@ -2,67 +2,108 @@
 #include <ext/pb_ds/assoc_container.hpp>
 #include <ext/pb_ds/tree_policy.hpp>
 using namespace  __gnu_pbds;
+using namespace  std;
  
 //                                「本 物 の 柔 術 を 見 せ て や る」
  
 #define vll      vector<long long int>
 #define ll       long long
 #define pb       push_back
+const ll M = 1e9 + 7;
+const ll N = 1e5 + 5;
+const ll inf = 2e18;
 #define all(x)   (x).begin(), (x).end()
-#define mod      1000000007
 #define FAST     ios_base ::sync_with_stdio(false); cin.tie(NULL)
-using namespace  std;
+#define forin(x,y) for(auto i=0;i<x;i++){int x;cin>>x;y.pb(x);}
+#define forout(x)  for(auto y:x){cout<<y<<' ';}
 typedef tree<ll, null_type, less<ll>, rb_tree_tag,tree_order_statistics_node_update> pbds;
+
+bool substringcheck(string s1,string s2){
+    // String 1 in String 2
+    if (s2.find(s1) != std::string::npos) return true;
+    else return false;
+}
+
+void rem_dup_order(vector<ll> &vec1) {
+  auto it = unique(vec1.begin(), vec1.end());
+    vec1.resize(distance(vec1.begin(), it));
+}
+
+ll mod(ll x) { return (x % M); }
+ll mod_minus(ll a, ll b)
+{
+    ll ans = (mod(a) - mod(b));
+    if (ans < 0)
+        ans = mod(ans + M);
+    return ans;
+}
+ll mod_mul(ll a, ll b) { return mod(mod(a) * mod(b)); }
+ll mod_add(ll a, ll b) { return mod(mod(a) + mod(b)); }
+ll power(ll a, ll n)
+{
+    if (n == 0)
+        return 1;
+    else if (n == 1)
+        return a;
+    ll R = power(a, n / 2) % M;
+    if (n % 2 == 0)
+    {
+        return mod(mod_mul(R, R));
+    }
+    else
+    {
+        return mod(mod_mul(mod_mul(R, a), mod(R)));
+    }
+}
+ll mod_div(ll a, ll b)
+{
+    ll ans = mod(a);
+    ll b1 = power(b, M - 2);
+    ans = mod(mod_mul(ans, b1));
+    return ans;
+}
 
 void solve()
 {
-    int n;cin>>n;
-    int a=0,b=0,c=0,d=0,count=0;
+    int n,taxi=0;cin>>n;
+    vll vec1;
+    forin(n,vec1);
+    map<int,int>m1;
     for(int i=0;i<n;i++){
-        int x;cin>>x;
-        if(x==1){
-            a++;
-        }
-        else if(x==2){
-            b++;
-        }
-        else if(x==3){
-            c++;
-        }
-        else{
-            d++;
-        }
+        m1[vec1[i]]++;
     }
-// 4 number
-    count+=d;
-// 3 number
-    if(a>=c){
-        a=a-c;
-        count+=c;
+    taxi+=m1[4]; //for 4
+    //for 3
+    if(m1[1]<=m1[3]){
+        taxi+=m1[1];
+        m1[3]-=m1[1];
+        m1[1]=0;
+        taxi+=m1[3];
     }
     else{
-        count+=c;
+        taxi+=m1[3];
+        m1[1]-=m1[3];
     }
-// 2 number
-    count+=floor(b/2);
-    b=b%2;
-    if(a>b){
-        a=a-b;
-        count+=b;
+    //for 2
+    taxi+=(m1[2]/4);
+    m1[2]-=m1[2]/4;
+    if(m1[2]%4!=0 && m1[2]<=(m1[1])){
+        taxi+=m1[2];
     }
-// 1 number
-    count+=a/4;
-    a=a%4;
-    count+=a;
-    // cout<<a<<" "<<b<<" "<<c<<" "<<d;
-    cout<<count<<endl;
+    else if(m1[2]%4!=0 && m1[2]<(m1[1])){
 
+    }
+
+    for(auto x:m1){
+        cout<<x.first<<" "<<x.second<<endl;
+    }
+    cout<<taxi<<endl;
 }
 
 int main(){
     FAST;
     ll t=1;
-    // cin>>t;
+    //cin>>t;
     while(t--){
         solve();
 }

@@ -23,19 +23,22 @@ bool substringcheck(string s1,string s2){
 }
 
 
+
 void solve()
 {
     int n;cin>>n;
-    vll vec1,vec2;
+    vll vec1,diff;
+    diff.push_back(INT_MAX);
     forin(n,vec1);
-    vec1=vec2;
-    sort(all(vec2));
+    int count=0;
+    bool istrue=false;
     for(int i=0;i<n;i++){
-        if(vec1[i]<vec1[i+1]){
-            
+        if(vec1[i]>vec1[i+1]){
+            count++;
+            diff.push_back(vec1[i]-vec1[i+1]);
+            istrue=true;
         }
     }
-
 }
 
 int main(){
